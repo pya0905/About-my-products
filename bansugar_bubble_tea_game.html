@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>【半糖多冰·防衛邊界】雙重人格特調氣泡飲工作坊</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+            background: linear-gradient(135deg, #fdfbf7 0%, #eef2f3 100%);
+            min-height: 100vh;
+        }
+        @keyframes shake {
+            0% { transform: translate(1px, 1px) rotate(0deg); }
+            20% { transform: translate(-3px, 0px) rotate(-1deg); }
+            40% { transform: translate(1px, -1px) rotate(1deg); }
+            60% { transform: translate(-1px, 2px) rotate(0deg); }
+            80% { transform: translate(-3px, 1px) rotate(-1deg); }
+            100% { transform: translate(1px, -2px) rotate(-1deg); }
+        }
+        .animate-shake {
+            animation: shake 0.4s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+        .animate-float {
+            animation: float 3s ease-in-out infinite;
+        }
+        @keyframes popIn {
+            0% { transform: scale(0.6); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        .animate-pop {
+            animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+    </style>
+</head>
+<body class="flex flex-col items-center justify-center p-4">
+
+    <!-- Header Banner -->
+    <header class="text-center mb-6 max-w-xl">
+        <div class="inline-block bg-amber-100 text-amber-800 px-4 py-1 rounded-full text-sm font-bold mb-2 shadow-sm">
+            <i class="fa-solid fa-mug-hot mr-1"></i> 彭玉安特製・雙重人格氣泡飲調配所
+        </div>
+        <h1 class="text-3xl md:text-4xl font-black text-slate-800 tracking-tight">
+            【半糖多冰·防衛邊界】
+        </h1>
+        <p class="text-slate-600 text-sm md:text-base mt-2">
+            你可以品嚐我的甜美，但不能越過我的邊界。打造你的專屬人格手搖飲！
+        </p>
+    </header>
+
+    <!-- Main Game Container -->
+    <main class="w-full max-w-lg bg-white/90 backdrop-blur-md rounded-3xl shadow-2xl p-6 relative border-4 border-amber-50">
+        
+        <!-- Step Indicator -->
+        <div class="flex justify-between items-center mb-6 border-b border-slate-100 pb-4">
+            <div class="text-xs font-bold text-slate-400 uppercase tracking-wider">調配進度</div>
+            <div id="step-indicator" class="text-sm font-black text-amber-600 bg-amber-50 px-3 py-1 rounded-full">
+                Step 1 / 3：選擇基底與氣場
+            </div>
+        </div>
+
+        <!-- STEP 1: Choose Vibe / Core Base -->
+        <div id="step-1-container" class="space-y-4">
+            <h2 class="text-lg font-black text-slate-800 flex items-center gap-2">
+                <i class="fa-solid fa-masks-theater text-pink-500"></i> 第一步：今天想展現什麼樣的雙重人格基底？
+            </h2>
+            <div class="grid grid-cols-1 gap-3">
+                <button onclick="selectBase('exploration')" class="base-option text-left p-4 rounded-2xl border-2 border-slate-200 hover:border-pink-400 hover:bg-pink-50/50 transition flex items-center gap-4 group">
+                    <div class="w-12 h-12 rounded-xl bg-pink-100 text-pink-600 flex items-center justify-center text-xl group-hover:scale-110 transition">
+                        <i class="fa-solid fa-fire"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-slate-800">向外探索・娛樂大師基底</h3>
+                        <p class="text-xs text-slate-500 mt-0.5">充滿社交能量、八卦嗅覺敏銳、帶給周遭無限歡樂與好人緣。</p>
+                    </div>
+                </button>
+                <button onclick="selectBase('defense')" class="base-option text-left p-4 rounded-2xl border-2 border-slate-200 hover:border-cyan-400 hover:bg-cyan-50/50 transition flex items-center gap-4 group">
+                    <div class="w-12 h-12 rounded-xl bg-cyan-100 text-cyan-600 flex items-center justify-center text-xl group-hover:scale-110 transition">
+                        <i class="fa-solid fa-shield-halved"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-slate-800">向內防衛・絕對邊界基底</h3>
+                        <p class="text-xs text-slate-500 mt-0.5">極度龜毛固執、敏感纖細，嚴禁任何精神背叛與強加意念。</p>
+                    </div>
+                </button>
+            </div>
+        </div>
+
+        <!-- STEP 2: Customize Ice, Sugar & Toppings -->
+        <div id="step-2-container" class="space-y-5 hidden">
+            <h2 class="text-lg font-black text-slate-800 flex items-center gap-2">
+                <i class="fa-solid fa-sliders text-amber-500"></i> 第二步：微調人格甜度、冰塊與特製配料
+            </h2>
+            
+            <!-- Sugar Level -->
+            <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                <div class="flex justify-between items-center mb-2">
+                    <span class="font-bold text-sm text-slate-700"><i class="fa-solid fa-heart text-pink-500 mr-1"></i> 糖度（娛樂與親和力）</span>
+                    <span id="sugar-label" class="text-xs font-bold bg-pink-100 text-pink-700 px-2 py-0.5 rounded-full">半糖（最佳平衡）</span>
+                </div>
+                <input type="range" min="0" max="100" value="50" id="sugar-slider" oninput="updateSliders()" class="w-full accent-pink-500 cursor-pointer">
+                <div class="flex justify-between text-[10px] text-slate-400 mt-1">
+                    <span>無糖（高冷高傲）</span>
+                    <span>半糖（剛好溫暖）</span>
+                    <span>全糖（社交達人）</span>
+                </div>
+            </div>
+
+            <!-- Ice Level (Brain Speed) -->
+            <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                <div class="flex justify-between items-center mb-2">
+                    <span class="font-bold text-sm text-slate-700"><i class="fa-solid fa-snowflake text-cyan-500 mr-1"></i> 冰量（腦袋轉速與危機處理）</span>
+                    <span id="ice-label" class="text-xs font-bold bg-cyan-100 text-cyan-700 px-2 py-0.5 rounded-full">多冰（極速運轉）</span>
+                </div>
+                <input type="range" min="0" max="100" value="80" id="ice-slider" oninput="updateSliders()" class="w-full accent-cyan-500 cursor-pointer">
+                <div class="flex justify-between text-[10px] text-slate-400 mt-1">
+                    <span>溫飲（慢條斯理）</span>
+                    <span>正常冰（穩定輸出）</span>
+                    <span>多冰（秒速解題）</span>
+                </div>
+            </div>
+
+            <!-- Toppings selection -->
+            <div>
+                <label class="block font-bold text-sm text-slate-700 mb-2"><i class="fa-solid fa-cubes text-purple-500 mr-1"></i> 加料選擇（複選 2 項）</label>
+                <div class="grid grid-cols-3 gap-2">
+                    <button onclick="toggleTopping('安心丸', this)" class="topping-btn p-3 rounded-xl border-2 border-slate-200 text-xs font-bold text-slate-700 hover:border-indigo-400 hover:bg-indigo-50 transition flex flex-col items-center gap-1">
+                        <i class="fa-solid fa-pills text-indigo-500 text-base"></i> 安心丸珍珠
+                    </button>
+                    <button onclick="toggleTopping('黃金ROI', this)" class="topping-btn p-3 rounded-xl border-2 border-slate-200 text-xs font-bold text-slate-700 hover:border-amber-400 hover:bg-amber-50 transition flex flex-col items-center gap-1">
+                        <i class="fa-solid fa-coins text-amber-500 text-base"></i> 報酬率金幣
+                    </button>
+                    <button onclick="toggleTopping('龜毛防禦', this)" class="topping-btn p-3 rounded-xl border-2 border-slate-200 text-xs font-bold text-slate-700 hover:border-emerald-400 hover:bg-emerald-50 transition flex flex-col items-center gap-1">
+                        <i class="fa-solid fa-shield text-emerald-500 text-base"></i> 龜毛椰果
+                    </button>
+                </div>
+            </div>
+
+            <button onclick="goToStep3()" class="w-full bg-slate-800 hover:bg-slate-900 text-white font-bold py-3.5 rounded-2xl shadow-lg transition flex items-center justify-center gap-2 mt-2">
+                確認配方，開始搖杯！ <i class="fa-solid fa-arrow-right"></i>
+            </button>
+        </div>
+
+        <!-- STEP 3: Shaking Animation & Brewing -->
+        <div id="step-3-container" class="space-y-6 text-center py-6 hidden">
+            <div id="shaker-icon" class="text-6xl text-amber-500 mb-2 animate-float">
+                <i class="fa-solid fa-glass-water-droplet"></i>
+            </div>
+            <h2 id="shake-status-text" class="text-xl font-black text-slate-800">正在大力搖晃特調中...</h2>
+            <p class="text-xs text-slate-500">正在融合極速大腦、固執防禦與高 ROI 報酬率精華...</p>
+            
+            <div class="w-full bg-slate-100 rounded-full h-3 overflow-hidden">
+                <div id="progress-bar" class="bg-gradient-to-r from-amber-500 to-pink-500 h-full w-0 transition-all duration-700"></div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="mt-8 text-center text-xs text-slate-500">
+        <p>© 2026 彭玉安創意思考專案. 【半糖多冰·防衛邊界】氣泡飲。</p>
+    </footer>
+
+    <!-- Modal: Final Drink Recipe Card (No alert/confirm) -->
+    <div id="modal-result" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm hidden flex items-center justify-center p-4 z-50">
+        <div class="bg-white rounded-3xl max-w-md w-full p-6 shadow-2xl animate-pop text-center border-4 border-amber-200 relative overflow-hidden">
+            
+            <!-- Decorative Badge -->
+            <div class="absolute -top-12 -right-12 w-28 h-28 bg-amber-100 rounded-full opacity-50"></div>
+
+            <div class="w-16 h-16 bg-gradient-to-br from-amber-400 to-pink-500 text-white rounded-full flex items-center justify-center text-2xl mx-auto mb-3 shadow-md animate-bounce">
+                <i class="fa-solid fa-wine-glass-empty"></i>
+            </div>
+            
+            <span class="bg-amber-100 text-amber-800 text-xs font-extrabold px-3 py-1 rounded-full uppercase tracking-wider">
+                獨家特調處方箋
+            </span>
+            <h3 id="result-drink-name" class="text-2xl font-black text-slate-800 mt-2 mb-1">【半糖多冰·防衛邊界】極限特調</h3>
+            
+            <!-- Quote Box -->
+            <div class="bg-pink-50 border border-pink-200 rounded-2xl p-4 my-4 text-left shadow-sm">
+                <p class="text-xs text-pink-600 font-extrabold mb-1"><i class="fa-solid fa-quote-left mr-1"></i> 品牌主標文案：</p>
+                <p id="result-main-quote" class="text-slate-800 font-black text-base italic">「你可以品嚐我的甜美，但不能越過我的邊界。」</p>
+            </div>
+
+            <!-- Specs Grid -->
+            <div class="grid grid-cols-2 gap-2 mb-4 text-xs">
+                <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-200 text-left">
+                    <span class="text-slate-400 block font-bold">冰塊/腦袋轉速</span>
+                    <span id="stat-ice" class="font-extrabold text-cyan-600">多冰・秒速解題</span>
+                </div>
+                <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-200 text-left">
+                    <span class="text-slate-400 block font-bold">甜度/娛樂親和</span>
+                    <span id="stat-sugar" class="font-extrabold text-pink-600">半糖・大眾療癒</span>
+                </div>
+                <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-200 text-left col-span-2">
+                    <span class="text-slate-400 block font-bold">精選配料</span>
+                    <span id="stat-toppings" class="font-extrabold text-purple-600">安心丸珍珠 + 報酬率金幣</span>
+                </div>
+            </div>
+
+            <div class="flex gap-2">
+                <button onclick="restartGame()" class="flex-1 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold py-3 rounded-xl transition text-sm">
+                    重新調配
+                </button>
+                <button onclick="closeResultModal()" class="flex-1 bg-slate-800 hover:bg-slate-900 text-white font-bold py-3 rounded-xl transition text-sm shadow-md">
+                    收藏這杯特調 <i class="fa-solid fa-check ml-1"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Custom Message Box (No alert/confirm) -->
+    <div id="modal-message" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm hidden flex items-center justify-center p-4 z-50">
+        <div class="bg-white rounded-2xl max-w-sm w-full p-6 shadow-2xl animate-pop text-center">
+            <div class="w-12 h-12 bg-amber-100 text-amber-600 rounded-full flex items-center justify-center text-xl mx-auto mb-3">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+            </div>
+            <h4 id="msg-title" class="font-bold text-slate-800 text-lg mb-1">提示</h4>
+            <p id="msg-text" class="text-slate-600 text-sm mb-5"></p>
+            <button onclick="closeModal('modal-message')" class="w-full bg-slate-800 text-white font-bold py-2.5 rounded-xl text-sm">我知道了</button>
+        </div>
+    </div>
+
+    <!-- JavaScript Game Logic -->
+    <script>
+        // Game State
+        let gameState = {
+            base: 'exploration',
+            sugar: 50,
+            ice: 80,
+            toppings: []
+        };
+
+        function showMessage(title, text) {
+            document.getElementById('msg-title').innerText = title;
+            document.getElementById('msg-text').innerText = text;
+            document.getElementById('modal-message').classList.remove('hidden');
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.add('hidden');
+        }
+
+        function selectBase(baseType) {
+            gameState.base = baseType;
+            // Move to Step 2
+            document.getElementById('step-1-container').classList.add('hidden');
+            document.getElementById('step-2-container').classList.remove('hidden');
+            document.getElementById('step-indicator').innerText = "Step 2 / 3：微調配方與加料";
+        }
+
+        function updateSliders() {
+            gameState.sugar = parseInt(document.getElementById('sugar-slider').value);
+            gameState.ice = parseInt(document.getElementById('ice-slider').value);
+
+            // Update Sugar label
+            const sLabel = document.getElementById('sugar-label');
+            if (gameState.sugar < 30) sLabel.innerText = "微糖（高冷高傲）";
+            else if (gameState.sugar < 70) sLabel.innerText = "半糖（剛好溫暖）";
+            else sLabel.innerText = "全糖（社交達人）";
+
+            // Update Ice label
+            const iLabel = document.getElementById('ice-label');
+            if (gameState.ice < 30) iLabel.innerText = "溫飲（慢條斯理）";
+            else if (gameState.ice < 70) iLabel.innerText = "正常冰（穩定輸出）";
+            else iLabel.innerText = "多冰（秒速解題）";
+        }
+
+        function toggleTopping(toppingName, btnElement) {
+            const index = gameState.toppings.indexOf(toppingName);
+            if (index > -1) {
+                gameState.toppings.splice(index, 1);
+                btnElement.classList.remove('border-amber-500', 'bg-amber-50', 'ring-2', 'ring-amber-300');
+            } else {
+                if (gameState.toppings.length >= 2) {
+                    showMessage("配料滿載", "最多只能選 2 種精選配料唷！");
+                    return;
+                }
+                gameState.toppings.push(toppingName);
+                btnElement.classList.add('border-amber-500', 'bg-amber-50', 'ring-2', 'ring-amber-300');
+            }
+        }
+
+        function goToStep3() {
+            if (gameState.toppings.length === 0) {
+                showMessage("請選擇配料", "至少選 1 項配料才能搖出完美的人格特調！");
+                return;
+            }
+
+            // Move to Step 3
+            document.getElementById('step-2-container').classList.add('hidden');
+            document.getElementById('step-3-container').classList.remove('hidden');
+            document.getElementById('step-indicator').innerText = "Step 3 / 3：職人手搖中";
+
+            // Animate progress bar
+            const progressBar = document.getElementById('progress-bar');
+            const shakerIcon = document.getElementById('shaker-icon');
+            shakerIcon.classList.add('animate-shake');
+
+            let width = 0;
+            const interval = setInterval(() => {
+                width += 5;
+                progressBar.style.width = width + '%';
+                if (width >= 100) {
+                    clearInterval(interval);
+                    shakerIcon.classList.remove('animate-shake');
+                    showResultModal();
+                }
+            }, 80);
+        }
+
+        function showResultModal() {
+            // Set dynamic names & quotes based on base
+            let drinkName = "【半糖多冰·防衛邊界】雙重人格特調";
+            let mainQuote = "你可以品嚐我的甜美，但不能越過我的邊界。";
+
+            if (gameState.base === 'exploration') {
+                drinkName = "【娛樂大師・向外探索氣泡飲】";
+                mainQuote = "用半糖的親和力擁抱世界，用多冰的腦袋瞬間解決所有危機。";
+            } else {
+                drinkName = "【絕對邊界・龜毛防衛特調】";
+                mainQuote = "你可以傾聽我的故事，但絕不允許任何精神背叛與強加。";
+            }
+
+            document.getElementById('result-drink-name').innerText = drinkName;
+            document.getElementById('result-main-quote').innerText = `「${mainQuote}」`;
+            
+            // Stats
+            const iceText = gameState.ice > 70 ? "多冰・秒速解題晶片" : "正常冰・穩定輸出";
+            const sugarText = gameState.sugar > 70 ? "全糖・大眾娛樂療癒" : "半糖・雙重防衛平衡";
+            
+            document.getElementById('stat-ice').innerText = iceText;
+            document.getElementById('stat-sugar').innerText = sugarText;
+            document.getElementById('stat-toppings').innerText = gameState.toppings.join(' + ') + " (ROI 100%)";
+
+            document.getElementById('modal-result').classList.remove('hidden');
+        }
+
+        function closeResultModal() {
+            document.getElementById('modal-result').classList.add('hidden');
+        }
+
+        function restartGame() {
+            closeResultModal();
+            document.getElementById('step-3-container').classList.add('hidden');
+            document.getElementById('step-1-container').classList.remove('hidden');
+            document.getElementById('step-indicator').innerText = "Step 1 / 3：選擇基底與氣場";
+            gameState.toppings = [];
+            // Reset topping buttons styling
+            document.querySelectorAll('.topping-btn').forEach(btn => {
+                btn.classList.remove('border-amber-500', 'bg-amber-50', 'ring-2', 'ring-amber-300');
+            });
+        }
+    </script>
+</body>
+</html>
